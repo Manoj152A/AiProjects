@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Exam Report</h1>
+        {% if no_flagged_events %}
+            <h2>No Flagged Activities Detected</h2>
+            <p>Thank you for completing the exam. No issues were detected.</p>
+        {% else %}
+            <h2>Flagged Events</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Event</th>
+                        <th>Timestamp</th>
+                        <th>Video Clip</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set counter = 1 %}
+                    {% for event in flagged_events %}
+                    <tr>
+                        <td>{{ counter }}</td>
+                        <td>{{ event.event }}</td>
+                        <td>{{ event.timestamp }}</td>
+                        <td>
+                            <video width="320" height="240" controls>
+                                <source src="{{ url_for('static', filename='captured/event_' ~ event.event ~ '_' ~ event.timestamp ~ '.mp4') }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </td>
+                    </tr>
+                    {% set counter = counter + 1 %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+        <a href="{{ url_for('exam_page') }}" class="btn btn-primary">Back to Exam</a>
+    </div>
+</body>
+</html>

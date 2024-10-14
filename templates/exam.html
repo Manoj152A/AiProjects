@@ -9,20 +9,17 @@
 </head>
 <body>
     <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8 text-center">
-                <h1 class="mb-4">Dummy Exam</h1>
-                <p class="lead">Answer the following questions while we monitor your identity:</p>
-                <ul class="list-group list-group-flush text-start">
-                    <li class="list-group-item">1. What is the capital of France?</li>
-                    <li class="list-group-item">2. What is 5 + 7?</li>
-                </ul>
-                <div class="position-relative video-container mt-4">
-                    <video id="exam-video" class="border" width="640" height="480" autoplay></video>
-                    <canvas id="face-box-overlay"></canvas>
-                </div>
-                <p id="warning-message" class="mt-3 text-danger fw-bold"></p>
-            </div>
+        <h1 class="mb-4">Dummy Exam</h1>
+        <form id="exam-form" method="POST" action="{{ url_for('submit_exam') }}">
+            <p>Answer the following questions:</p>
+            <ul>
+                <li>1. What is the capital of France?</li>
+                <li>2. What is 5 + 7?</li>
+            </ul>
+            <button type="submit" class="btn btn-primary">Submit Exam</button>
+        </form>
+        <div class="position-relative video-container mt-4">
+            <video id="exam-video" class="border" width="640" height="480" autoplay></video>
         </div>
     </div>
 

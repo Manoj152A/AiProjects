@@ -1,4 +1,4 @@
-const video = document.getElementById('video');
+const video = document.getElementById('video'); 
 const canvas = document.getElementById('canvas');
 const captureButton = document.getElementById('capture');
 const form = document.getElementById('image-form');

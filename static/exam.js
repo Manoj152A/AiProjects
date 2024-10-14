@@ -1,19 +1,5 @@
 const examVideo = document.getElementById('exam-video');
 const warningMessage = document.getElementById('warning-message');
-const canvasOverlay = document.createElement('canvas');
-const ctxOverlay = canvasOverlay.getContext('2d');
-
-// Set canvas overlay size to match the video size
-canvasOverlay.width = examVideo.width;
-canvasOverlay.height = examVideo.height;
-canvasOverlay.style.position = 'absolute';
-canvasOverlay.style.top = examVideo.offsetTop + 'px';
-canvasOverlay.style.left = examVideo.offsetLeft + 'px';
-canvasOverlay.style.zIndex = '10';  // Ensure the canvas is on top of the video
-canvasOverlay.style.pointerEvents = 'none';  // Disable interactions with the canvas
-
-// Append the canvas to the same parent container as the video
-examVideo.parentElement.appendChild(canvasOverlay);
 
 // Access the webcam and stream it to the video element
 navigator.mediaDevices.getUserMedia({ video: true })

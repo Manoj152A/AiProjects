@@ -23,6 +23,28 @@
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='webcam.js') }}"></script>
+    <script>
+        // Access the webcam
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                const video = document.getElementById('video');
+                video.srcObject = stream;
+            });
+
+        document.getElementById('capture').onclick = () => {
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+            const video = document.getElementById('video');
+            context.drawImage(video, 0, 0);
+            canvas.toBlob(blob => {
+                const file = new File([blob], "webcam.jpg", { type: 'image/jpeg' });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                document.getElementById('webcam-input').files = dataTransfer.files;
+                document.getElementById('image-form').submit();
+            }, 'image/jpeg');
+            document.getElementById('message').innerText = "Image captured successfully!";
+        };
+    </script>
 </body>
 </html>
